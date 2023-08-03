@@ -1,0 +1,210 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
+    <style>
+        .container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh; /* Adjust this if necessary */
+        }
+        
+        .centered {
+    width: 50rem;
+    border: 2px solid rgb(59, 57, 57);
+    padding: 3rem;
+  /* Add any desired styling for the centered div */
+}
+.form-group{
+    margin-bottom: 1rem;
+}
+.autocomplete {
+      position: relative;
+      display: inline-block;
+    }
+
+    /* Style the input field */
+    .autocomplete input {
+      width: 200px;
+      padding: 5px;
+    }
+
+    /* Style the dropdown list */
+    .autocomplete .dropdown-list {
+      position: absolute;
+      z-index: 1;
+      top: 100%;
+      left: 0;
+      right: 0;
+      max-height: 150px;
+      overflow-y: auto;
+      border: 1px solid #ccc;
+      background-color: #fff;
+    }
+
+    /* Style the list items */
+    .autocomplete .dropdown-item {
+      padding: 5px;
+      cursor: pointer;
+    }
+
+    /* Style the selected item */
+    .autocomplete .dropdown-item:hover {
+      background-color: #f1f1f1;
+    }
+    </style>
+</head>
+<body>
+  <span class="username" style="display: none;">{{name}}</span>
+    <h2>Profile : {{name}}</h2>
+    {% if completed %}
+    <div class="container">
+      <div>
+        <h2>You have already uploaded your profile , You may wait for responses</h2>
+      </div>
+    </div>
+    {% else %}
+    <div class="container">
+        <div class="centered">
+            <form>
+              {% csrf_token %}
+                
+                <div class="form-group row">
+                  <label for="inputEmail3" class="col-sm-2 col-form-label">Location</label>
+                  <div class="col-sm-10">
+                    <div class="autocomplete">
+                        <input class="location" type="text" id="myInput" onkeyup="filterDropdown()" placeholder="Type here">
+                        <div class="dropdown-list" id="myDropdown">
+                         
+                        </div>
+                      </div>
+                  </div>
+                </div>
+                <div class="form-group row">
+                    <h5>What best describes your current role?</h5>
+                    <!-- <label for="inputEmail3" class="col-sm-2 col-form-label">Job Role</label> -->
+                    <div class="col-sm-10">
+                        <select class="role" multiple name="cars" id="cars">
+                            <option hidden disabled selected value value=""></option>
+                            {% for role in roles %}
+                            <option value="{{role.jobName}}">{{role.jobName}}</option>
+                            {% endfor %}
+                        </select><br>
+                        <div id="listall">
+                          <!-- <span class="listjob" style="background-color: rgb(74, 193, 232); border-radius: 25%;padding-inline: 1rem;font-weight: bold;padding-top: 0.2rem;padding-bottom: 0.2rem;">DATA  <button style="background-color: transparent;border: none;" id="cross">x</button></span> -->
+
+                        </div>
+
+                    </div>
+                </div>
+                <fieldset class="form-group">
+                  <div class="row">
+                    <legend class="col-form-label col-sm-2 pt-0">Are You Student?</legend>
+                    <div class="col-sm-10">
+                      <div class="form-check">
+                        <input class="form-check-input student" type="radio" name="gridRadios" id="gridRadios1" value="option1">
+                        <label class="form-check-label" for="gridRadios1">
+                          Yes
+                        </label>
+                      </div>
+                      <div class="form-check">
+                        <input class="form-check-input nostudent" type="radio" name="gridRadios" id="gridRadios2" value="option2">
+                        <label class="form-check-label" for="gridRadios2">
+                          No
+                        </label>
+                      </div>
+                     
+                    </div>
+                  </div>
+                </fieldset>
+                <div id="studentDetails" class="form-group row">
+                    <h5>What school are you currently attending (or did you recently graduate from)?</h5>
+                    <label for="inputEmail3" class="col-sm-2 col-form-label">School Name</label>
+                    <div class="col-sm-10">
+                        <input type="text" name="" id="schoolName">
+                        <label for="">Joined year</label>
+                        <input style="width: 3rem;" type="text" id="joinyear">
+
+                        <label for="">Graduation Year</label>
+                        <input style="width: 3rem;" type="text" id="gradyear">
+                    </div>
+                </div>
+
+                <div id="graduatedDetails" class="form-group row">
+                    <h5>Where do you currently work?</h5>
+                    <label for="inputEmail3" class="col-sm-2 col-form-label">Job Title</label>
+                    <div class="col-sm-10">
+                        <input placeholder="e.g Web Developer" type="text" name="" id="jobttitle">
+                        <label for="">Company Name</label>
+                        <input placeholder="Infosys" type="text" name="" id="companyname">
+                    </div>
+                </div>
+
+
+
+                <div class="form-group row">
+                    <h5>How many years of experience do you have in your current role?</h5>
+                    <!-- <label for="inputEmail3" class="col-sm-2 col-form-label">Experince</label> -->
+                    <div class="col-sm-10">
+                        <select name="cars" id="cars" class="exp">
+                            <option hidden disabled selected value value=""></option>
+                            <option value=""> less than 1 year </option>
+                            <option value="">1 Year</option>
+                            <option value="">2 Year</option>
+                            <option value="">3 Year</option>
+                            <option value="">4 Year</option>
+                            <option value="">5 Year</option>
+                            <option value="">6+ Year</option>
+
+
+                          </select>
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <label for="inputEmail3" class="col-sm-2 col-form-label">Your Resume</label>
+                    <div class="col-sm-10">
+                        <input accept="application/pdf" type="file" name="" id="resume">
+                    </div>
+                </div>
+
+
+                <div class="form-group row">
+                    <label for="inputEmail3" class="col-sm-2 col-form-label">Linkedin Profile</label>
+                    <div class="col-sm-10">
+                        <input type="text" name="" id="linkurl">
+                    </div>
+                </div>
+                
+                <div class="form-group row">
+                    <label for="inputEmail3" class="col-sm-2 col-form-label">GitHub Link</label>
+                    <div class="col-sm-10">
+                        <input type="text" name="" id="giturl">
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <label for="inputEmail3" class="col-sm-2 col-form-label">Your Website</label>
+                    <div class="col-sm-10">
+                        <input type="text" name="" id="weburl">
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                  <div class="col-sm-10">
+                    <button id="profilesubmit"  class="btn btn-primary">Submit</button>
+                  </div>
+                </div>
+              </form>
+        </div>
+      </div>
+    {% endif %}
+    <script src="{% static '/js/profile.js' %}"></script>  
+      
+</body>
+</html>

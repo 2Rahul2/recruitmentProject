@@ -1,0 +1,89 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
+    <style>
+        .container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            /* height: 100vh; Adjust this if necessary */
+        }
+    
+    </style>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg bg-body-tertiary">
+        <div class="container-fluid">
+          <a class="navbar-brand" href="#">Navbar</a>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+              <li class="nav-item">
+                <a class="nav-link active" aria-current="page" href="#">Home</a>
+              </li>
+              <!-- <li class="nav-item">
+                <a class="nav-link" href="#">Link</a>
+              </li>
+              <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                  Dropdown
+                </a>
+                <ul class="dropdown-menu">
+                  <li><a class="dropdown-item" href="#">Action</a></li>
+                  <li><a class="dropdown-item" href="#">Another action</a></li>
+                  <li><hr class="dropdown-divider"></li>
+                  <li><a class="dropdown-item" href="#">Something else here</a></li>
+                </ul>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link disabled" aria-disabled="true">Disabled</a>
+              </li> -->
+            </ul>
+            
+              <button style="margin-inline-start: 1rem;" class="btn btn-outline-success" type="submit"><a style="text-decoration: none;" href="/login">Login</a></button>
+              <button style="margin-inline-start: 1rem;" class="btn btn-outline-success" type="submit"><a style="text-decoration: none;" href="/signin">SignUp</a></button>
+            
+          </div>
+        </div>
+      </nav>
+    {% if role == 'Appliant' %}
+    <div style="margin-top: 15rem;" class="container">
+        <div class="centered">
+            <h1 style="font-size: 3.5rem;">Apply for you job here</h1><br>
+            
+        </div>
+    </div>
+    <div class="container">
+        <div style="padding-inline: 10rem;" class="centered">
+            <h2 style="font-size: 1.8rem;">Are you a top 2% Software Engineer, Product Manager or Data Scientist?
+                Let leading Indian technology companies compete to hire you.</h2>
+                
+        </div>
+    </div>
+    <br><br>
+    <div class="container">
+        <div style="padding-inline: 10rem;" class="centered">
+                <button style="font-size: 1.5rem;" type="button" class="btn btn-outline-info"><a style="text-decoration: none;" href="/profile">Apply Here</a></button>
+        </div>
+    </div>
+    {% else %}
+    <div style="height: 80vh;" class="container">
+        <div>
+            <button style="font-size: 1.5rem;" type="button" class="btn btn-outline-info"><a style="text-decoration: none;" href="/explore">Explore</a></button>
+        </div>
+    </div>
+    {% endif %}
+
+    
+
+    <script src="{% static '/js/index.js' %}"></script>  
+
+</body>
+</html>
